@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jolisa's Portfolio</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Zilla+Slab&display=swap" rel="stylesheet" />
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+
+  <!-- Hart Fluid Inspired Styles -->
+  <style>
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Zilla Slab', serif;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #111;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      font-family: 'Abril Fatface', cursive;
+      color: #fff !important;
+    }
+
+    .nav-link {
+      transition: color .3s;
+    }
+
+    .nav-link:hover {
+      color: #e1d22b !important;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 80vh;
+      background: url('https://images.squarespace-cdn.com/content/62...jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color #fff;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      text-transform: uppercase;
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      margin-bottom: 2rem;
+      font-family: 'Abril Fatface';
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .container-wide {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* Cards */
+    .card-custom {
+      border: none;
+      border-radius: .75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: transform .3s;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">Jolisa L. Brewster</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content animate-text" id="welcomeText">
+
+      <h1>Hello, I'm Jolisa.
+        </p>welcome to my Portfolio!</h1>
+      <p>I'm passionate about crafting thoughtful, impactful work.This portfolio showcases a selection of my projects,
+        skills, and creative journey.</p>
+      </p>Whether you're here to explore my latest work, learn more about what I do, or get in touch for a potential
+      collaboration—I'm glad you're here.</p>
+      <p>| Writer | Thinker | Creator | </p>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container-wide">
+      <h2 class="section-title">About Me</h2>
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+          <img src="images/JO.jpg" alt="Jolisa" class="img-fluid rounded">
+        </div>
+        <div class="col-md-8">
+          </p>Jolisa is a proud Trinbagonian transplant currently based in Auburn, Alabama. She brings a vibrant blend
+          of Caribbean warmth and global perspective to everything she does. With an Associate of Arts in Media and a
+          Bachelor of Arts in Mass Communication from the University of Sunderland, she has built a strong foundation in
+          media, storytelling, and communication strategy. She is currently furthering her education by pursuing a
+          Master of Arts in Technical Communication at Auburn University.</p>
+          </p> A passionate writer at heart, Jolisa is also an avid reader and a naturally effusive communicator. Her
+          enthusiasm for language and storytelling is matched by her analytical mindset and keen eye for detail, which
+          make her a natural problem solver. Over the years, she has developed a unique skill set that blends project
+          management with both technical and creative writing. This combination allows her to craft content that is not
+          only engaging and user-focused but also aligned with organisational goals and deadlines.
+          </p>Whether she’s managing a project timeline, refining technical documentation, or brainstorming content
+          strategies, Jolisa brings energy, insight, and a collaborative spirit to every endeavor. She’s excited to
+          continue growing as a communicator and to contribute meaningfully to every project she joins.You can find her
+          exploring local eateries, reading a good book or day dreaming about the beach!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section id="work" style="background: #cbc18f;">
+    <div class="container-wide">
+      <h2 class="section-title"> Creative & Professional Work</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card card-custom">
+
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="resume and project work/Resume - Brewster_Jolisa.pdf">Resume</a> |
+                <a href="resume and project work/Photo-Synthesis Draft 11_20_24.pdf">Projects</a> |
+                <a href="https://www.outlish.com/author/jbrewster/">Articles</a>
+              </h5>
+              <p class="card-text">Here you will find my work experience and some projects I've worked on which include writing, edititng, and desktop publishing. </p>
+            </div>
+          </div>
+        </div>
+        <!-- Repeat for more projects -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container-wide text-center">
+      <h2 class="section-title">Get In Touch</h2>
+      <p>Email me at <a href="mailto:jlb0249@auburn.edu">jlb0249@auburn.edu</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Jolisa Brewster. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Animations -->
+  <script>
+    const split = new SplitType('#welcomeText', { types: 'chars' });
+    gsap.from(split.chars, { y: 50, opacity: 0, stagger: 0.05, duration: 1, ease: 'back.out(1.7)' });
+    document.querySelectorAll('h2, p').forEach(el => {
+      gsap.fromTo(el, { opacity: 0, y: 30 }, {
+        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 80%' }
+      });
+    });
+    // Parallax Hover
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      split.chars.forEach(char => char.style.transform = `translate(${x}px, ${y}px)`);
+    });
+  </script>
+</body>
+
+</html>
