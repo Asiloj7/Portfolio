@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=3.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jolisa Brewster Portfolio</title>
 
   <!-- Bootstrap -->
@@ -14,74 +15,60 @@
   <style>
     body {
       font-family: 'Zilla Slab', serif;
-      line-height: 1.5;
       color: #222;
-      font-size: 15px; /* Body text increased */
+      line-height: 1.6;
+      background-color: #fff;
     }
 
-    /* Skip Link */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 10px;
-      z-index: 100;
+    a {
+      color: #005fcc;
     }
 
-    .skip-link:focus {
-      top: 0;
+    a:focus, button:focus {
+      outline: 3px solid #ffbf47;
+      outline-offset: 2px;
     }
 
-    /* Navbar */
     .navbar {
-      background: #111;
+      background-color: #111;
     }
 
-    .navbar a {
+    .navbar-brand,
+    .nav-link {
+      font-family: 'Abril Fatface', cursive;
       color: #fff !important;
     }
 
-    .navbar a:focus,
-    .navbar a:hover {
-      text-decoration: underline;
-    }
-
-    /* Hero */
     .hero {
-      background: #333;
+      background-color: #333;
       color: #fff;
       padding: 4rem 1rem;
       text-align: center;
     }
 
-    /* Sections */
+    .hero h1 {
+      font-size: 12.5rem;
+    }
+
     section {
       padding: 3rem 1rem;
     }
 
-    h1, h2, h3 {
-      font-family: 'Abril Fatface', cursive;
-    }
-
-    /* About Me heading scrollable */
-    #about-heading {
-      font-size: 18px; /* About Me font */
-      margin-bottom: 1.5rem;
+    .section-title {
+      font-family: 'Abril Fatface';
+      font-size: 15rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .work-card {
-      max-width: 500px;
+    .container-wide {
+      max-width: 1100px;
       margin: 0 auto;
-      text-align: center;
     }
 
-    /* Focus styles */
-    a:focus {
-      outline: 3px solid #f4c542;
-      outline-offset: 2px;
+    .card-custom {
+      border: 1px solid #ddd;
+      border-radius: 8px;
     }
 
     footer {
@@ -95,17 +82,17 @@
 
 <body>
 
-  <!-- Skip to content -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- Skip Link -->
+  <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Main navigation">
+  <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
     <div class="container">
       <a class="navbar-brand" href="#">Jolisa L. Brewster</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
         aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
+        <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navMenu">
@@ -118,42 +105,54 @@
     </div>
   </nav>
 
-  <main id="main-content">
-
-    <!-- Hero -->
-    <header class="hero" role="banner">
-      <h1>"You can always edit a bad page. You can't edit a blank page."-Jodie Picoult</h1>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container-wide">
+      <h1>"You can always edit a bad page. You can't edit a blank page."-Jodi Picoult.</h1>
       <p></p>
-      <p></p>
+      <p>
+      </p>
       <p><strong>Writer | Thinker | Creator</strong></p>
-    </header>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
 
     <!-- About -->
     <section id="about" aria-labelledby="about-heading">
-      <div class="container">
-        <h2 id="about-heading">About Me</h2>
+      <div class="container-wide">
+
+
+        
+        <h2 id="about-heading" class="section-title">About Me</h2>
 
         <div class="row align-items-center">
           <div class="col-md-4 text-center">
             <img src="images/JO.jpg"
                  alt="Portrait of Jolisa Brewster"
-                 class="img-fluid rounded" />
+                 class="img-fluid rounded">
           </div>
 
           <div class="col-md-8">
             <p>
-              Jolisa Brewster is a Trinbagonian professional based in Auburn, Alabama, with a background in media,
-              storytelling, and communication strategy.
+              Jolisa is a Trinbagonian creative based in Auburn, Alabama, with a background in media, storytelling,
+              and communication strategy.
             </p>
 
             <p>
               She holds a Bachelor of Arts in Mass Communication from the University of Sunderland and is currently
-              pursuing a Master of Arts in Technical Communication at Auburn University.
+              pursuing a Master’s in Technical Communication at Auburn University.
             </p>
 
             <p>
-              Her work combines technical writing, creative storytelling, and project management to deliver clear,
-              user-focused content aligned with organizational goals.
+              Her work blends technical and creative writing, producing content that is
+              engaging, user-focused, and strategically aligned.
+            </p>
+
+            <p>
+              Outside of work, she enjoys reading, exploring local spaces, and spending time imagining her next
+              creative project.
             </p>
           </div>
         </div>
@@ -161,65 +160,48 @@
     </section>
 
     <!-- Work -->
-    <section id="work" aria-labelledby="work-heading" style="background:#cbc18f;">
-      <div class="container">
-        <h2 id="work-heading" class="text-center">Creative & Professional Work</h2>
+    <section id="work" style="background-color:#f5f5dc;" aria-labelledby="work-heading">
+      <div class="container-wide text-center">
+        <h2 id="work-heading" class="section-title">Creative & Professional Work</h2>
 
-        <div class="work-card">
+        <!-- Centered Card -->
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card card-custom">
+              <div class="card-body">
+                <h3 class="h5">Portfolio Links</h3>
 
-          <h3></h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="resume and project work/resume.jolisa.pdf">Resume (PDF)</a>
+                  </li>
+                  <li>
+                    <a href="resume and project work/Photo-Synthesis.pdf">Projects (PDF)</a>
+                  </li>
+                  <li>
+                    <a href="https://www.outlish.com/author/jbrewster/">Published Articles</a>
+                  </li>
+                </ul>
 
-          <ul class="list-unstyled">
-            <li>
-              <a href="resume and project work/resume.jolisa.pdf"
-                 target="_blank"
-                 rel="noopener"
-                 aria-describedby="new-tab">
-                Resume
-              </a>
-            </li>
-
-            <li>
-              <a href="resume and project work/Photo-Synthesis.pdf"
-                 target="_blank"
-                 rel="noopener"
-                 aria-describedby="new-tab">
-                Projects
-              </a>
-            </li>
-
-            <li>
-              <a href="https://www.outlish.com/author/jbrewster/"
-                 target="_blank"
-                 rel="noopener"
-                 aria-describedby="new-tab">
-                Articles
-              </a>
-            </li>
-          </ul>
-
-          <p id="new-tab" class="visually-hidden">
-            This link opens in a new tab.
-          </p>
-
-          <p>
-            These materials include writing, editing, and desktop publishing work.
-          </p>
-
+                <p>
+                  A selection of professional writing, editing, and publishing work.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" aria-labelledby="contact-heading">
-      <div class="container text-center">
-        <h2 id="contact-heading">Get In Touch</h2>
+      <div class="container-wide text-center">
+        <h2 id="contact-heading" class="section-title">Get In Touch</h2>
 
         <p>
           Email:
-          <a href="mailto:brewster.jolisa@gmail.com">
-            brewster.jolisa@gmail.com
-          </a>
+          <a href="mailto:brewster.jolisa@gmail.com">brewster.jolisa@gmail.com</a>
         </p>
       </div>
     </section>
@@ -227,19 +209,11 @@
   </main>
 
   <!-- Footer -->
-  <footer role="contentinfo">
+  <footer>
     <p>&copy; 2026 Jolisa Brewster. All rights reserved.</p>
   </footer>
 
-  <!-- Accessible alert for new tab -->
-  <script>
-    document.querySelectorAll('a[target="_blank"]').forEach(link => {
-      link.addEventListener('click', function () {
-        alert('This link will open in a new tab.');
-      });
-    });
-  </script>
-
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
