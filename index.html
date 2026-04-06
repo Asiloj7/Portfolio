@@ -1,4 +1,4 @@
-
+Reduced motion support
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,22 +15,26 @@
   <style>
     body {
       font-family: 'Zilla Slab', serif;
-      color: #222;
-      line-height: 1.6;
-      background-color: #fff;
+      color: #1a1a1a;
+      line-height: 1.7;
+      background-color: #ffffff;
     }
 
     a {
-      color: #005fcc;
+      color: #004aad;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     a:focus, button:focus {
       outline: 3px solid #ffbf47;
-      outline-offset: 2px;
+      outline-offset: 3px;
     }
 
     .navbar {
-      background-color: #111;
+      background-color: #000;
     }
 
     .navbar-brand,
@@ -40,14 +44,14 @@
     }
 
     .hero {
-      background-color: #333;
+      background-color: #222;
       color: #fff;
-      padding: 4rem 1rem;
+      padding: 3rem 1rem;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: 12.5rem;
+      font-size: clamp(2rem, 5vw, 3.5rem);
     }
 
     section {
@@ -56,7 +60,7 @@
 
     .section-title {
       font-family: 'Abril Fatface';
-      font-size: 15rem;
+      font-size: clamp(2rem, 4vw, 3rem);
       text-align: center;
       margin-bottom: 2rem;
     }
@@ -67,15 +71,44 @@
     }
 
     .card-custom {
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       border-radius: 8px;
     }
 
     footer {
-      background: #111;
+      background: #000;
       color: #ccc;
       text-align: center;
       padding: 1rem;
+    }
+
+    /* Accessible modal */
+    .modal-accessible {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      color: #000;
+      padding: 1.5rem;
+      max-width: 400px;
+      border-radius: 6px;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -108,10 +141,9 @@
   <!-- Hero -->
   <header class="hero">
     <div class="container-wide">
-      <h1>"You can always edit a bad page. You can't edit a blank page."-Jodi Picoult.</h1>
-      <p></p>
-      <p>
-      </p>
+      <h1>
+        “You can always edit a bad page. You can't edit a blank page.”
+      </h1>
       <p><strong>Writer | Thinker | Creator</strong></p>
     </div>
   </header>
@@ -120,12 +152,9 @@
   <main id="main-content">
 
     <!-- About -->
-    <section id="about" aria-labelledby="about-heading">
+    <section id="about">
       <div class="container-wide">
-
-
-        
-        <h2 id="about-heading" class="section-title">About Me</h2>
+        <h2 class="section-title">About Me</h2>
 
         <div class="row align-items-center">
           <div class="col-md-4 text-center">
@@ -135,36 +164,20 @@
           </div>
 
           <div class="col-md-8">
-            <p>
-              Jolisa is a Trinbagonian creative based in Auburn, Alabama, with a background in media, storytelling,
-              and communication strategy.
-            </p>
-
-            <p>
-              She holds a Bachelor of Arts in Mass Communication from the University of Sunderland and is currently
-              pursuing a Master’s in Technical Communication at Auburn University.
-            </p>
-
-            <p>
-              Her work blends technical and creative writing, producing content that is
-              engaging, user-focused, and strategically aligned.
-            </p>
-
-            <p>
-              Outside of work, she enjoys reading, exploring local spaces, and spending time imagining her next
-              creative project.
-            </p>
+            <p>Jolisa is a Trinbagonian creative based in Auburn, Alabama...</p>
+            <p>She holds a Bachelor of Arts in Mass Communication...</p>
+            <p>Her work blends technical and creative writing...</p>
+            <p>Outside of work, she enjoys reading and exploring...</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Work -->
-    <section id="work" style="background-color:#f5f5dc;" aria-labelledby="work-heading">
+    <section id="work" style="background-color:#f5f5dc;">
       <div class="container-wide text-center">
-        <h2 id="work-heading" class="section-title">Creative & Professional Work</h2>
+        <h2 class="section-title">Creative & Professional Work</h2>
 
-        <!-- Centered Card -->
         <div class="row justify-content-center">
           <div class="col-md-6">
             <div class="card card-custom">
@@ -173,19 +186,24 @@
 
                 <ul class="list-unstyled">
                   <li>
-                    <a href="resume and project work/resume.jolisa.pdf">Resume (PDF)</a>
+                    <a href="resume and project work/resume.jolisa.pdf">
+                      Resume (PDF)
+                    </a>
                   </li>
                   <li>
-                    <a href="resume and project work/Photo-Synthesis.pdf">Projects (PDF)</a>
+                    <a href="resume and project work/Photo-Synthesis.pdf">
+                      Projects (PDF)
+                    </a>
                   </li>
                   <li>
-                    <a href="https://www.outlish.com/author/jbrewster/">Published Articles</a>
+                    <a href="https://www.outlish.com/author/jbrewster/"
+                       class="external-link"
+                       data-href="https://www.outlish.com/author/jbrewster/">
+                      Published Articles (external site)
+                    </a>
                   </li>
                 </ul>
 
-                <p>
-                  A selection of professional writing, editing, and publishing work.
-                </p>
               </div>
             </div>
           </div>
@@ -195,26 +213,60 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" aria-labelledby="contact-heading">
+    <section id="contact">
       <div class="container-wide text-center">
-        <h2 id="contact-heading" class="section-title">Get In Touch</h2>
+        <h2 class="section-title">Get In Touch</h2>
 
         <p>
           Email:
-          <a href="mailto:brewster.jolisa@gmail.com">brewster.jolisa@gmail.com</a>
+          <a href="mailto:brewster.jolisa@gmail.com">
+            brewster.jolisa@gmail.com
+          </a>
         </p>
       </div>
     </section>
 
   </main>
 
+  <!-- Accessible Modal -->
+  <div id="externalModal" class="modal-accessible" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <h2 id="modal-title">Leaving Site</h2>
+      <p>You are about to visit an external website. Continue?</p>
+      <button id="confirmLeave" class="btn btn-primary">Yes, continue</button>
+      <button id="cancelLeave" class="btn btn-secondary">Cancel</button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>&copy; 2026 Jolisa Brewster. All rights reserved.</p>
   </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Scripts -->
+  <script>
+    let targetUrl = "";
+
+    document.querySelectorAll(".external-link").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        targetUrl = this.dataset.href;
+        document.getElementById("externalModal").style.display = "flex";
+      });
+    });
+
+    document.getElementById("confirmLeave").onclick = () => {
+      window.open(targetUrl, "_blank", "noopener");
+      closeModal();
+    };
+
+    document.getElementById("cancelLeave").onclick = closeModal;
+
+    function closeModal() {
+      document.getElementById("externalModal").style.display = "none";
+    }
+  </script>
 
 </body>
+</html>
 </html>
