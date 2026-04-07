@@ -1,210 +1,649 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jolisa Brewster Portfolio</title>
+  <title>Jolisa L. Brewster — Portfolio</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Zilla+Slab&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Zilla+Slab:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
 
   <style>
+    /* ── RESET & TOKENS ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1209;
+      --paper:     #f5f0e8;
+      --warm:      #c8b88a;
+      --gold:      #b89a4a;
+      --accent:    #7c4b2a;
+      --muted:     #6b5d4a;
+      --nav-h:     64px;
+      --radius:    4px;
+      --shadow:    0 4px 24px rgba(26,18,9,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Zilla Slab', serif;
-      color: #1a1a1a;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 1rem;
       line-height: 1.7;
-      background-color: #ffffff;
     }
 
-    a {
-      color: #004aad;
+    /* ── SKIP LINK ──────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 1rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+      padding: .5rem 1rem;
+      border-radius: var(--radius);
+      z-index: 9999;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: .75rem; }
+
+    /* ── STICKY NAV ─────────────────────────────────────── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      height: var(--nav-h);
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,.35);
     }
 
-    a:hover {
-      text-decoration: underline;
+    .nav-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    a:focus, button:focus {
-      outline: 3px solid #ffbf47;
-      outline-offset: 3px;
-    }
-
-    .navbar {
-      background-color: #000;
-    }
-
-    .navbar-brand,
-    .nav-link {
+    .nav-brand {
       font-family: 'Abril Fatface', cursive;
-      color: #fff !important;
+      color: var(--warm);
+      font-size: 1.25rem;
+      text-decoration: none;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .nav-brand:focus { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 2px solid var(--warm);
+      border-radius: var(--radius);
+      cursor: pointer;
+      padding: 6px;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--warm);
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-toggle:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: .25rem;
     }
 
+    .nav-links a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: .9rem;
+      letter-spacing: .04em;
+      padding: .4rem .8rem;
+      border-radius: var(--radius);
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.1); color: #fff; }
+    .nav-links a:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
+    .nav-links a[aria-current="page"] {
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* mobile nav */
+    @media (max-width: 680px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: absolute;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: var(--ink);
+        flex-direction: column;
+        padding: 1rem 1.5rem 1.5rem;
+        gap: .25rem;
+        border-top: 1px solid rgba(255,255,255,.1);
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+        transition: transform .25s ease, opacity .2s ease;
+        pointer-events: none;
+      }
+      .nav-links.open {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    /* ── HERO ───────────────────────────────────────────── */
     .hero {
-      background-color: #222;
-      color: #fff;
-      padding: 3rem 1rem;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 6rem 1.5rem 5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(184,154,74,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: .25rem .8rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-family: 'Abril Fatface', cursive;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      color: var(--warm);
+      margin-bottom: 1.25rem;
     }
 
-    section {
-      padding: 3rem 1rem;
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #bbb;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      font-style: italic;
     }
 
-    .section-title {
-      font-family: 'Abril Fatface';
-      font-size: clamp(2rem, 4vw, 3rem);
-      text-align: center;
-      margin-bottom: 2rem;
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+      padding: .75rem 2rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: background .2s, transform .15s;
     }
+    .hero-cta:hover { background: var(--warm); transform: translateY(-2px); }
+    .hero-cta:focus { outline: 3px solid var(--warm); outline-offset: 3px; }
 
-    .container-wide {
-      max-width: 1100px;
+    /* ── SECTION SHELL ──────────────────────────────────── */
+    .section {
+      padding: 5rem 1.5rem;
+    }
+    .section--alt { background: #ede8de; }
+
+    .container {
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    .card-custom {
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    .section-label {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: .5rem;
     }
 
-    footer {
-      background: #000;
-      color: #ccc;
-      text-align: center;
-      padding: 1rem;
+    .section-title {
+      font-family: 'Abril Fatface', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--ink);
+      margin-bottom: 2.5rem;
     }
 
-    /* Accessible modal */
-    .modal-accessible {
-      position: fixed;
-      top: 0;
-      left: 0;
+    /* ── ABOUT ──────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-photo {
       width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: none;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 4px solid var(--warm);
+    }
+
+    .about-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--warm);
+      border-radius: var(--radius);
+      display: flex;
       align-items: center;
       justify-content: center;
+      font-family: 'Abril Fatface', cursive;
+      font-size: 4rem;
+      color: var(--ink);
+      letter-spacing: .05em;
+      box-shadow: var(--shadow);
     }
 
-    .modal-content {
-      background: #fff;
-      color: #000;
+    .about-body p + p { margin-top: 1.1rem; }
+
+    .about-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.5rem;
+    }
+
+    .chip {
+      background: var(--ink);
+      color: var(--warm);
+      font-size: .78rem;
+      padding: .3rem .75rem;
+      border-radius: 100px;
+      letter-spacing: .04em;
+    }
+
+    /* ── TAB WORK SECTION ───────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      gap: .5rem;
+      border-bottom: 2px solid var(--warm);
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      padding: .65rem 1.25rem;
+      font-family: 'Zilla Slab', serif;
+      font-size: .95rem;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: var(--radius) var(--radius) 0 0;
+      transition: color .2s, background .2s, border-color .2s;
+      letter-spacing: .03em;
+    }
+
+    .tab-btn:hover {
+      color: var(--ink);
+      background: rgba(184,154,74,.12);
+    }
+
+    .tab-btn:focus {
+      outline: 3px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .tab-btn[aria-selected="true"] {
+      color: var(--ink);
+      font-weight: 600;
+      border-bottom-color: var(--accent);
+      background: rgba(124,75,42,.07);
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn .3s ease;
+    }
+
+    .tab-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Work cards */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--paper);
+      border: 1px solid var(--warm);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(26,18,9,.16);
+    }
+
+    .work-card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .work-card h3 {
+      font-family: 'Abril Fatface', cursive;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: .5rem;
+    }
+
+    .work-card p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .work-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: .04em;
+      border-bottom: 2px solid transparent;
+      transition: border-color .2s;
+    }
+
+    .work-link:hover { border-bottom-color: var(--accent); }
+    .work-link:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+    .work-link::after { content: '→'; }
+
+    /* ── CONTACT ────────────────────────────────────────── */
+    .contact-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card p {
+      color: #bbb;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .contact-email {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: .75rem 2rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: background .2s, transform .15s;
+    }
+
+    .contact-email:hover { background: var(--warm); transform: translateY(-2px); }
+    .contact-email:focus { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: #888;
+      text-align: center;
       padding: 1.5rem;
-      max-width: 400px;
-      border-radius: 6px;
+      font-size: .85rem;
+      letter-spacing: .04em;
     }
 
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
+    /* ── GLOBAL FOCUS ────────────────────────────────────── */
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    /* sr-only utility */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Skip Link -->
-  <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+  <!-- Skip to content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
-    <div class="container">
-      <a class="navbar-brand" href="#">Jolisa L. Brewster</a>
+  <!-- ── STICKY NAV ──────────────────────────────────────── -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#" aria-label="Jolisa L. Brewster — home">Jolisa L. Brewster</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#about"   aria-label="Navigate to About section">About</a></li>
+        <li><a href="#work"    aria-label="Navigate to Work section">Work</a></li>
+        <li><a href="#contact" aria-label="Navigate to Contact section">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="container-wide">
-      <h1>
-        “You can always edit a bad page. You can't edit a blank page.”-Jodi Picoult
-      </h1>
-      <p><strong>Writer | Thinker | Creator</strong></p>
-    </div>
-  </header>
-
-  <!-- Main Content -->
   <main id="main-content">
 
-    <!-- About -->
-    <section id="about">
-      <div class="container-wide">
-        <h2 class="section-title">About Me</h2>
+    <!-- ── HERO ──────────────────────────────────────────── -->
+    <header class="hero" role="banner">
+      <p class="hero-tag" aria-hidden="true">Portfolio</p>
+      <h1>Writer.<br>Thinker.<br>Creator.</h1>
+      <p class="hero-sub">Technical communication, creative storytelling &amp; purposeful content strategy.</p>
+      <a href="#about" class="hero-cta">Explore My Work</a>
+    </header>
 
-        <div class="row align-items-center">
-          <div class="col-md-4 text-center">
-            <img src="images/JO.jpg"
-                 alt="Portrait of Jolisa Brewster"
-                 class="img-fluid rounded">
-          </div>
+    <!-- ── ABOUT ──────────────────────────────────────────── -->
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <div class="container">
+        <span class="section-label">Who I am</span>
+        <h2 class="section-title" id="about-heading">About Me</h2>
 
-          <div class="col-md-8">
-            <p>Jolisa is a Trinbagonian creative based in Auburn, Alabama, with a background in media, storytelling and communication strategy.</p>
-            <p>She holds a Bachelor of Arts in Mass Communication from the University of Sunderland and is currently pursuing her Master's in Technical Communication at Auburn University.</p>
-            <p>Her work blends technical and creative writing, producing content that is engaging, user-focused, and strategically aligned with oraganizational goals and objectives.</p>
-            <p>Outside of work, she enjoys reading, exploring local spots, and spending time imagining her next creative project.</p>
+        <div class="about-grid">
+          <!-- Replace the placeholder div below with:
+               <img src="images/JO.jpg" alt="Portrait of Jolisa Brewster" class="about-photo" />
+               when deploying -->
+          <div class="about-photo-placeholder" role="img" aria-label="Portrait of Jolisa Brewster — initials J B">JB</div>
+
+          <div class="about-body">
+            <p>Hello and welcome! I'm Jolisa, a Trinbagonian professional based in Auburn, Alabama, with a background in media, storytelling, and communication strategy.</p>
+
+            <p>I'm currently pursuing a Master in Technical Communication at Auburn University and hold a Bachelor of Arts in Mass Communication from the University of Sunderland.</p>
+
+            <p>My work combines technical writing, creative storytelling, and project management to deliver clear, user-focused content aligned with organisational goals.</p>
+
+            <p>My mission is to lead a life grounded in integrity and honesty. Through mentorship and leadership, I seek to inspire and empower future generations — driven by a commitment to communication, social advocacy, equity, accountability, and lasting impact.</p>
+
+            <div class="about-chips" role="list" aria-label="Areas of expertise">
+              <span class="chip" role="listitem">Technical Writing</span>
+              <span class="chip" role="listitem">Creative Storytelling</span>
+              <span class="chip" role="listitem">Project Management</span>
+              <span class="chip" role="listitem">Communication Strategy</span>
+              <span class="chip" role="listitem">Social Advocacy</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Work -->
-    <section id="work" style="background-color:#f5f5dc;">
-      <div class="container-wide text-center">
-        <h2 class="section-title">Creative & Professional Work</h2>
+    <!-- ── WORK (TABBED) ──────────────────────────────────── -->
+    <section id="work" class="section section--alt" aria-labelledby="work-heading">
+      <div class="container">
+        <span class="section-label">What I do</span>
+        <h2 class="section-title" id="work-heading">Creative &amp; Professional Work</h2>
 
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <div class="card card-custom">
-              <div class="card-body">
-                <h3 class="h5"></h3>
+        <!-- Tab bar -->
+        <div class="tab-bar" role="tablist" aria-label="Work categories">
+          <button class="tab-btn"
+                  id="tab-resume"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="panel-resume">
+            📄 Resume
+          </button>
+          <button class="tab-btn"
+                  id="tab-projects"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="panel-projects"
+                  tabindex="-1">
+            🗂 Projects
+          </button>
+          <button class="tab-btn"
+                  id="tab-articles"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="panel-articles"
+                  tabindex="-1">
+            ✍️ Articles
+          </button>
+        </div>
 
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="resume and project work/resume.jolisa.pdf">
-                      Resume (PDF)
-                    </a>
-                  </li>
-                  <li>
-                    <a href="resume and project work/Photo-Synthesis.pdf">
-                      Projects (PDF)
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.outlish.com/author/jbrewster/"
-                       class="external-link"
-                       data-href="https://www.outlish.com/author/jbrewster/">
-                      Published Articles 
-                    </a>
-                  </li>
-                </ul>
+        <!-- Panel: Resume -->
+        <div class="tab-panel active"
+             id="panel-resume"
+             role="tabpanel"
+             aria-labelledby="tab-resume"
+             tabindex="0">
+          <div class="work-grid">
+            <div class="work-card">
+              <span class="work-card-icon" aria-hidden="true">📄</span>
+              <h3>My Resume</h3>
+              <p>A comprehensive overview of my professional background, academic achievements, and core competencies in technical communication and media.</p>
+              <a class="work-link"
+                 href="resume and project work/resume.jolisa.pdf"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Download resume — opens in new tab">
+                View Resume
+              </a>
+              <span class="sr-only">(opens in a new tab)</span>
+            </div>
+          </div>
+        </div>
 
-              </div>
+        <!-- Panel: Projects -->
+        <div class="tab-panel"
+             id="panel-projects"
+             role="tabpanel"
+             aria-labelledby="tab-projects"
+             tabindex="0"
+             hidden>
+          <div class="work-grid">
+            <div class="work-card">
+              <span class="work-card-icon" aria-hidden="true">📷</span>
+              <h3>Photo Synthesis</h3>
+              <p>A desktop publishing project showcasing editorial design, visual storytelling, and layout composition across a structured photo essay format.</p>
+              <a class="work-link"
+                 href="resume and project work/Photo-Synthesis.pdf"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="View Photo Synthesis project — opens in new tab">
+                View Project
+              </a>
+              <span class="sr-only">(opens in a new tab)</span>
+            </div>
+
+            <div class="work-card">
+              <span class="work-card-icon" aria-hidden="true">🗂</span>
+              <h3>Writing &amp; Editing</h3>
+              <p>Selected writing, editing, and desktop publishing samples demonstrating clarity, voice, and user-centred content design across formats.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Articles -->
+        <div class="tab-panel"
+             id="panel-articles"
+             role="tabpanel"
+             aria-labelledby="tab-articles"
+             tabindex="0"
+             hidden>
+          <div class="work-grid">
+            <div class="work-card">
+              <span class="work-card-icon" aria-hidden="true">✍️</span>
+              <h3>Outlish Magazine</h3>
+              <p>Published articles covering culture, identity, and community — blending narrative journalism with strategic communication for a diverse readership.</p>
+              <a class="work-link"
+                 href="https://www.outlish.com/author/jbrewster/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Read articles on Outlish — opens in new tab">
+                Read Articles
+              </a>
+              <span class="sr-only">(opens in a new tab)</span>
             </div>
           </div>
         </div>
@@ -212,61 +651,116 @@
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <div class="container-wide text-center">
-        <h2 class="section-title">Get In Touch</h2>
+    <!-- ── CONTACT ────────────────────────────────────────── -->
+    <section id="contact" class="section" aria-labelledby="contact-heading">
+      <div class="container">
+        <span class="section-label">Say hello</span>
+        <h2 class="section-title" id="contact-heading">Get In Touch</h2>
 
-        <p>
-          Email:
-          <a href="mailto:brewster.jolisa@gmail.com">
+        <div class="contact-card">
+          <p>I'm always open to new opportunities, collaborations, and conversations. Drop me a line anytime.</p>
+          <a class="contact-email"
+             href="mailto:brewster.jolisa@gmail.com"
+             aria-label="Send email to brewster.jolisa@gmail.com">
             brewster.jolisa@gmail.com
           </a>
-        </p>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Accessible Modal -->
-  <div id="externalModal" class="modal-accessible" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-content">
-      <h2 id="modal-title">Leaving Site</h2>
-      <p>You are about to visit an external website. Continue?</p>
-      <button id="confirmLeave" class="btn btn-primary">Yes, continue</button>
-      <button id="cancelLeave" class="btn btn-secondary">Cancel</button>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer role="contentinfo">
     <p>&copy; 2026 Jolisa Brewster. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
+  <!-- ── SCRIPTS ────────────────────────────────────────── -->
   <script>
-    let targetUrl = "";
+    /* ─── Mobile Nav Toggle ─── */
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-    document.querySelectorAll(".external-link").forEach(link => {
-      link.addEventListener("click", function(e) {
-        e.preventDefault();
-        targetUrl = this.dataset.href;
-        document.getElementById("externalModal").style.display = "flex";
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('open', !expanded);
+    });
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('open');
       });
     });
 
-    document.getElementById("confirmLeave").onclick = () => {
-      window.open(targetUrl, "_blank", "noopener");
-      closeModal();
-    };
+    // Highlight active nav link on scroll
+    const navItems = document.querySelectorAll('.nav-links a');
 
-    document.getElementById("cancelLeave").onclick = closeModal;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(a => {
+            a.removeAttribute('aria-current');
+            if (a.getAttribute('href') === '#' + entry.target.id) {
+              a.setAttribute('aria-current', 'page');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
 
-    function closeModal() {
-      document.getElementById("externalModal").style.display = "none";
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+    /* ─── WCAG Tab Widget ─── */
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels  = document.querySelectorAll('[role="tabpanel"]');
+
+    function activateTab(btn) {
+      tabButtons.forEach(b => {
+        b.setAttribute('aria-selected', 'false');
+        b.setAttribute('tabindex', '-1');
+      });
+      tabPanels.forEach(p => {
+        p.classList.remove('active');
+        p.hidden = true;
+      });
+
+      btn.setAttribute('aria-selected', 'true');
+      btn.removeAttribute('tabindex');
+
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      panel.classList.add('active');
+      panel.hidden = false;
     }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => activateTab(btn));
+
+      // Arrow-key navigation (WCAG 2.1 pattern)
+      btn.addEventListener('keydown', e => {
+        const tabs = [...tabButtons];
+        const idx  = tabs.indexOf(btn);
+
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          const next = tabs[(idx + 1) % tabs.length];
+          next.focus(); activateTab(next);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const prev = tabs[(idx - 1 + tabs.length) % tabs.length];
+          prev.focus(); activateTab(prev);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          tabs[0].focus(); activateTab(tabs[0]);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          tabs[tabs.length - 1].focus(); activateTab(tabs[tabs.length - 1]);
+        }
+      });
+    });
   </script>
 
 </body>
-</html>
 </html>
